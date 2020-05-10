@@ -38,7 +38,7 @@ export default ({ navigation } : any) => {
     }
 
     function onPlay(){
-        navigation.navigate('Player', { movie: navigation.getParam('movie') });
+        navigation.navigate('Player', { movie: navigation.getParam('movie'), nameMovie: movie?.name });
     }
 
     async function onChangeFavorite(){
