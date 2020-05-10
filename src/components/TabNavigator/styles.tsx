@@ -4,6 +4,7 @@ export default StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center",
+        alignSelf: 'center',
         flexDirection: "row",
         paddingVertical: 20,
         paddingHorizontal: 5,
@@ -17,14 +18,6 @@ export default StyleSheet.create({
     icon: {
         color: "#FFF",
         fontSize: 20,
-        marginLeft: 20,
-        marginRight: 20
+        marginHorizontal: 20
     },
-
-    input: {
-        color: "#3f7cbb",
-        marginLeft: 10,
-        fontSize: 14,
-        flex: 1
-    }
 });

@@ -20,8 +20,20 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     'Inter-SemiBoldItalic': 'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12',
-    'Albertiny Demo': require('./src/assets/fonts/Albertiny/AlbertinyDemo.otf'),
-    'Cream Cake': require('./assets/fonts/CreamCake/CreamCake.ttf')
+    'Lato-Light': require('./assets/fonts/Lato/Lato-Light.ttf'),
+    'Lato-Hairline': require('./assets/fonts/Lato/Lato-Thin.ttf'),
+    'Lato Bold': require('./assets/fonts/Lato/Lato-Bold.ttf'),
+    'Albertiny Demo': require('./assets/fonts/Albertiny/AlbertinyDemo.otf'),
+    'Cream Cake': require('./assets/fonts/CreamCake/CreamCake.ttf'),
+    'Roboto Light': require('./assets/fonts/Roboto/Roboto-Light.ttf'),
+    'Roboto Medium': require('./assets/fonts/Roboto/Roboto-Medium.ttf'),
+    'Roboto': require('./assets/fonts/Roboto/Roboto-Regular.ttf'),
+    'Roboto Thin': require('./assets/fonts/Roboto/Roboto-Thin.ttf'),
+    'Roboto Bold': require('./assets/fonts/Roboto/Roboto-Bold.ttf'),
+    'Roboto Black': require('./assets/fonts/Roboto/Roboto-Black.ttf'),
+    'Comfortaa Light': require('./assets/fonts/Comfortaa/Comfortaa-Light.ttf'),
+    'Comfortaa Medium': require('./assets/fonts/Comfortaa/Comfortaa-Medium.ttf'),
+    'Comfortaa Bold': require('./assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
   });
     
   useEffect(() => {

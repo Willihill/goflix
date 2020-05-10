@@ -39,17 +39,6 @@ const INITIAL_STATE:UserReducer = {
 
 const set = (state = INITIAL_STATE, action:{ user: UserReducer} ) => {
     const newState : UserReducer = { ...state, ...action.user };
-
-    // Salva o user na AsyncStorage
-    AsyncStorage.setItem("user_name", newState.name);
-    AsyncStorage.setItem("user_surname", newState.surname);
-    AsyncStorage.setItem("user_email", newState.email);
-    AsyncStorage.setItem("user_picture", newState.picture);
-    AsyncStorage.setItem("user_birthday", newState.birthday);
-    AsyncStorage.setItem("user_gender", newState.gender);
-    AsyncStorage.setItem("tokenJwt", newState.tokenJwt);
-
-
     return { ...state, ...action.user };
 };
 

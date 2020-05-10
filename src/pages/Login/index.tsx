@@ -22,7 +22,8 @@ export default ({ navigation } : any) => {
 
         // Carregando dados do usaurio do AsyncStorage
         (async () => {
-            if(await AsyncStorage.getItem('tokenJwt'))
+            const token = await AsyncStorage.getItem('tokenJwt');
+            if(!token)
                 return;
 
             SaveUser(dispatch, {
@@ -45,8 +46,8 @@ export default ({ navigation } : any) => {
 
         await api.post("/Authentication/Login", { "email": email, "password": senha })
         .then(
-            (resp) => {
-                SaveUser(dispatch, {
+            async (resp) => {
+                await SaveUser(dispatch, {
                     name: resp.data.name,
                     surname: resp.data.surname,
                     birthday: resp.data.birthday,
@@ -54,14 +55,16 @@ export default ({ navigation } : any) => {
                     gender: resp.data.gender,
                     picture: resp.data.picture,
                     tokenJwt: resp.data.tokenJwt
-                })
+                });
+
+                navigation.navigate("Main");
             },
 
             (reject) => {
                 alert(reject.response.data.message)
+                setLoading(false)
             }
         )
-        .finally(() => setLoading(false));
         
     }
 

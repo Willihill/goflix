@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleProp, TextStyle, TouchableOpacity } from "react-native";
+import { View, TextInput, StyleProp, TextStyle, TouchableOpacity, AsyncStorage } from "react-native";
 
 import { AntDesign, EvilIcons, Octicons, Ionicons } from "@expo/vector-icons";
 
@@ -10,6 +10,11 @@ type InputFatProps = {
 }
 
 export default (props: InputFatProps) => {
+
+    async function onLogout(){
+        await AsyncStorage.clear();
+        props.navigation.navigate('Login');
+    }
 
     return(
         <View style={styles.container}>
@@ -29,7 +34,7 @@ export default (props: InputFatProps) => {
                 <AntDesign name="user" style={styles.icon} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onLogout} >
                 <AntDesign name="logout" style={styles.icon} />
             </TouchableOpacity>
         </View>
