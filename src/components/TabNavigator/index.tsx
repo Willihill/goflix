@@ -21,7 +21,7 @@ export default () => {
 
     return(
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Favorite")}>
                 <AntDesign name="hearto" style={[styles.icon, (navigation.state.routeName === 'Favorite' ? styles.iconActive : {})]} 
                 />
             </TouchableOpacity>
@@ -36,7 +36,7 @@ export default () => {
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                 <AntDesign name="user" style={[styles.icon, (navigation.state.routeName === 'Profile' ? styles.iconActive : {}) ]} 
                 />
             </TouchableOpacity>

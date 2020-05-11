@@ -15,12 +15,16 @@ import Dashboard from "./pages/Dashboard";
 import MovieDetail from "./pages/MovieDetail";
 import Player from "./pages/Player";
 import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import Favorite from "./pages/Favorite";
 
 const StackMain = createStackNavigator({
     Dashboard,
     MovieDetail,
     Player,
-    Search
+    Search,
+    Profile,
+    Favorite
 },
 {
     headerMode: 'none'
