@@ -179,6 +179,9 @@ export default ({ navigation } : any) => {
                                 style={{ flex: 1 }}
                                 maximumValue={totalMiliseconds}
                                 minimumValue={0}
+                                thumbTintColor="#FFF"
+                                minimumTrackTintColor="#5e45f7"
+                                maximumTrackTintColor="rgba(94, 69, 247, 0.9)"
                             />
                             <Text style={{ color: '#FFF' }}>{getTimeFromMilliseconds(totalMiliseconds)}</Text>
                         </View>
