@@ -6,10 +6,20 @@ export default StyleSheet.create({
         alignItems: "center",
         alignSelf: 'center',
         flexDirection: "row",
-        paddingVertical: 10,
-        //paddingBottom: 10,
-        paddingHorizontal: 5,
-        borderRadius: 100,
+        //paddingVertical: 10,
+        paddingBottom: 0,
+
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        borderBottomWidth: 0,
+        borderBottomColor: '#5e45f7',
+        //borderBottomStartRadius: 35,
+
+
+
+        //borderRadius: 100,
         //backgroundColor: "rgba( 255, 255, 255, .7 )",
         //backgroundColor: "rgba( 0, 0, 0, .7 )",
         //backgroundColor: "#59caef",
@@ -19,13 +29,13 @@ export default StyleSheet.create({
         bottom: 10,
         left: 0,
         right: 0,
-        marginHorizontal: 20,
+        marginHorizontal: 25,
         shadowOffset: {
             width: 20,
             height: 10
           },
         shadowOpacity: 0.5,
-        height: 50,
+        height: 55,
         shadowRadius: 1,
         shadowColor: 'black',
         elevation: 10,
