@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StatusBar, ImageBackground, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StatusBar, ImageBackground, ActivityIndicator, Image } from 'react-native';
 
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 
@@ -7,8 +7,9 @@ import ClassificationMovie from '../../components/ClassificationMovie';
 
 import api from '../../services/api';
 
-import { MovieDetailModel } from './types';
+import { MovieDetailModel, MovieActorModel } from './types';
 import styles from './styles';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default ({ navigation } : any) => {
 
@@ -44,6 +45,21 @@ export default ({ navigation } : any) => {
     async function onChangeFavorite(){
 
     }
+
+    const renderActor = (actor: MovieActorModel) => 
+        <View key={actor.id.toString()} style={styles.cntActor}>
+            {/* Picture */}
+            <Image
+                source={{
+                    uri: `data:image/png;base64,${actor.picture}`
+                }}
+                style={{ borderRadius: 200 }}
+                width={80}
+                height={80}
+            />
+            <Text style={styles.nameActor}>{actor.name}</Text>
+            <Text style={styles.typeActor}>{actor.type}</Text>
+        </View>
 
     return(
         <>
@@ -118,7 +134,18 @@ export default ({ navigation } : any) => {
 
                 {/* Descrição do filme */}
                 <Text style={styles.descriptionMovie}>{movie?.description}</Text>
-
+                
+                {/* Elenco */}
+                <View style={{ flexDirection: 'column', marginVertical: 40 }}>
+                    <Text style={{ color: 'gray', fontSize: 20, paddingLeft: 20, marginBottom: 10, fontFamily: 'Lato-Light' }}>Elenco</Text>
+                    <FlatList
+                        keyExtractor={(item) => item.id.toString()}
+                        data={movie?.actors}
+                        renderItem={(item) => renderActor(item.item)}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
+                </View>
 
             </View>
         </ScrollView>

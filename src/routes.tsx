@@ -14,11 +14,13 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import MovieDetail from "./pages/MovieDetail";
 import Player from "./pages/Player";
+import Search from "./pages/Search";
 
 const StackMain = createStackNavigator({
     Dashboard,
     MovieDetail,
-    Player
+    Player,
+    Search
 },
 {
     headerMode: 'none'

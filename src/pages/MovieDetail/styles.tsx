@@ -95,5 +95,26 @@ export default StyleSheet.create({
         fontFamily: 'Roboto Light',
         textAlignVertical: 'top',
         paddingHorizontal: 20
+    },
+
+    cntActor: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginHorizontal: 10
+    },
+
+    nameActor: {
+        maxWidth: 100,
+        fontFamily: 'Roboto Light',
+        fontSize: 15,
+        textAlign: 'center',
+        flexWrap: "wrap-reverse"
+    },
+
+    typeActor: {
+        fontFamily: 'Roboto Light',
+        fontSize: 12,
+        color: 'gray'
     }
 });

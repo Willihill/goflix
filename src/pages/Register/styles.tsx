@@ -10,7 +10,7 @@ export default StyleSheet.create({
     cntLogin: {
         flex: 1,
         flexDirection: "column",
-        paddingHorizontal: 40,
+        paddingHorizontal: 30,
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "stretch",

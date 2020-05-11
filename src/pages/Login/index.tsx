@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { View, Text, TouchableOpacity, StatusBar, AsyncStorage } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import InputFat from '../../components/InputFat';
 import ButtonFat from '../../components/ButtonFat';
@@ -79,7 +80,8 @@ export default ({ navigation } : any) => {
                 {/* Form login */}
                 <View style={styles.cntLogin}>
                     <InputFat 
-                        iconName="user" 
+                        iconComponent={MaterialCommunityIcons}
+                        iconName="email" 
                         value={email}
                         onChangeText={setEmail}
                         moreProps={{
@@ -109,6 +111,12 @@ export default ({ navigation } : any) => {
                 </View>
 
                 {/* New User */}
+                <View style={{ justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row', paddingBottom: 50 }}>
+                    <Text style={{ color: '#FFF', fontSize: 14 }}>Não tem uma conta? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                        <Text style={{ color: '#0e84b6', fontSize: 14 }}>Cadastre-se agora</Text>
+                    </TouchableOpacity>
+                </View>
         </LinearGradient>
     )
 }

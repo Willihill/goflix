@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, TextInput, StyleProp, TextStyle } from "react-native";
+import React, { ReactComponentElement } from 'react';
+import { View, TextInput, StyleProp, TextStyle, NativeComponent } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -12,21 +12,29 @@ type InputFatProps = {
     onChangeText?: (text: string) => void,
     style?: StyleProp<TextStyle>,
     moreProps?: any,
-    isPassword?: boolean
+    isPassword?: boolean,
+    maxLength?: number,
+    iconComponent?: any
 }
 
 export default (props: InputFatProps) => {
 
     return(
         <View style={[styles.container, props.style]}>
-            <AntDesign 
-                name={props.iconName} 
-                style={styles.icon} 
-            />
+            { props.iconComponent 
+            ?
+                <props.iconComponent name="email" style={styles.icon} />
+            :
+                <AntDesign 
+                    name={props.iconName}
+                    style={styles.icon} 
+                />
+            }
             
             <TextInput 
                 style={styles.input}
                 value={props.value}
+                maxLength={props?.maxLength ?? 9999}
                 {...props.moreProps}
                 placeholder={props.placeholder}
                 placeholderTextColor="#70aff0"

@@ -7,12 +7,13 @@ import SideSwipe from 'react-native-sideswipe'
 
 import InputFat from '../../components/InputFat';
 import ButtonFat from '../../components/ButtonFat';
+import CategoryList from '../../components/CategoryList';
 import TabNavigator from '../../components/TabNavigator';
 
 import api from '../../services/api';
 import { SaveUser } from '../../services/user';
 
-import { HighlightsType } from './types';
+import { HighlightsType, CategoryType } from './types';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { timing } from 'react-native-reanimated';
@@ -23,6 +24,7 @@ export default ({ navigation } : any) => {
 
     const [indexFeatured, setIndexFeatured] = useState<number>(0);
     const [highlights, setHighlights] = useState<HighlightsType[]>([]);
+    const [categorys, setCategorys] = useState<CategoryType[]>([]);
 
     const fadeOpacityIn = useRef(new Animated.Value(1)).current
     const fadeOpacityOut = useRef(new Animated.Value(0.5)).current
@@ -39,7 +41,10 @@ export default ({ navigation } : any) => {
             // Carregando os destaques
             await loadHighlights();
 
-            navigation.navigate('MovieDetail', { movie: 1 });
+            // Carregando as categorias
+            await loadCategorys();
+
+            //navigation.navigate('MovieDetail', { movie: 1 });
         })()
 
     }, []);
@@ -57,6 +62,19 @@ export default ({ navigation } : any) => {
                 console.log('Erro ao buscar os destaques: ', reject)
             }
         )
+    }
+
+    async function loadCategorys(){
+        await api.get('/Category')
+        .then(
+            (resp) => {
+                setCategorys(resp.data);
+            },
+            (reject) => {
+                console.log('Erro ao buscar as categorias: ', reject)
+            }
+        );
+
     }
 
     function handleFade(index: number){
@@ -124,8 +142,8 @@ export default ({ navigation } : any) => {
                         return(
                             <Animated.View
                                 key={params.itemIndex}
-                                currentIndex={params.currentIndex}
-                                animatedValue={params.animatedValue}
+                                //currentIndex={params.currentIndex}
+                                //animatedValue={params.animatedValue}
                                 style={[styles.cntDestaque, 
                                     {
                                     width: widthFeatured,
@@ -158,14 +176,19 @@ export default ({ navigation } : any) => {
 
                 {/* Categorias */}
                 <View style={styles.cntList}>
-                    <Text style={styles.titleList}>Categorias</Text>
-
+                    {categorys.map((category) => 
+                        <CategoryList
+                            key={category.id}
+                            category={category}
+                            navigation={navigation}
+                        />
+                    )}
                 </View>
 
             </ScrollView>
 
             {/* Tab navigator control */}
-            <TabNavigator navigation={navigation}/>
+            <TabNavigator />
         </View>
     )
 }

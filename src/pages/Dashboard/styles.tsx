@@ -11,7 +11,7 @@ export default StyleSheet.create({
     logo: {
         fontFamily: "Cream Cake", 
         fontSize: 60, 
-        color: '#59caef', 
+        color: '#5e45f7', 
         textAlign: 'center',
         marginTop: 10
     },
@@ -23,14 +23,23 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'stretch',
         alignSelf: 'center',
-        marginVertical: 20
+        marginVertical: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 12,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 18,
     },
 
     cntList: {
         //flex: 1,
         //resizeMode: 's'
         //width: 240
-        paddingLeft: 20
+        //paddingLeft: 20
     },
 
     titleList: {
