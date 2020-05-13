@@ -134,7 +134,7 @@ export default ({ navigation } : any) => {
             <StatusBar backgroundColor="#518dcb" barStyle="light-content" />
                 {/* Logo */}
 
-                {/* Form login */}
+                {/* Form register */}
                 <View style={styles.cntLogin}>
                     <View style={{ flexDirection: 'row' }}>
                         <InputFat 

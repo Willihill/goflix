@@ -21,13 +21,25 @@ export default StyleSheet.create({
     playPause: {
         color: '#FFF', 
         fontSize: 40, 
-        paddingVertical: 22, 
-        paddingLeft: 27,
-        paddingRight: 20,
-        borderRadius: 100, 
+        ///paddingVertical: 22, 
+        ///paddingLeft: 27,
+        //paddingRight: 20,
+        ///borderRadius: 100, 
+        //backgroundColor: 'rgba(0, 0, 0, .5)',
+        //borderWidth: .5,
+        //borderColor: '#FFF',
+        marginHorizontal: 30
+    },
+
+    pause: {
+        color: '#FFF', 
+        fontSize: 40, 
+        // paddingVertical: 22, 
+        // paddingHorizontal: 23,
+        // borderRadius: 100, 
         backgroundColor: 'rgba(0, 0, 0, .5)',
-        borderWidth: .5,
-        borderColor: '#FFF',
+        //borderWidth: .5,
+        //borderColor: '#FFF',
         marginHorizontal: 30
     },
 

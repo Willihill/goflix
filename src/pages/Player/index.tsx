@@ -4,7 +4,7 @@ import { View, StatusBar, TouchableOpacity, Slider, Text, TouchableWithoutFeedba
 import { Video } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { OrientationLock } from 'expo-screen-orientation';
-import { Ionicons, SimpleLineIcons, Entypo } from "@expo/vector-icons";
+import { Ionicons, SimpleLineIcons, Entypo, AntDesign } from "@expo/vector-icons";
 
 import styles from './styles';
 
@@ -88,10 +88,10 @@ export default ({ navigation } : any) => {
     }
 
     async function onForward(){
-        if(positionMiliseconds+(10*100) >= totalMiliseconds)
+        if(positionMiliseconds+(10*1000) >= totalMiliseconds)
             return;
 
-        await playerRef.current?.setPositionAsync(positionMiliseconds+(10*100));
+        await playerRef.current?.setPositionAsync(positionMiliseconds+(10*1000));
     }
 
     function onChangeControl(){
@@ -104,6 +104,7 @@ export default ({ navigation } : any) => {
             <Video
                 source={{
                     uri: `https://goflix.azurewebsites.net/api/Player/${navigation.getParam('movie')}/index.m3u8`
+                    //uri: `http://192.168.0.101:54635/api/Player/${navigation.getParam('movie')}/index.m3u8`
                 }}
                 style={{
                     flex: 1
@@ -151,7 +152,7 @@ export default ({ navigation } : any) => {
 
                             {/* Play / Pause / Retry */}
                             <TouchableOpacity onPress={onPlayPause}>
-                                <SimpleLineIcons name="control-play" style={styles.playPause} />
+                                <AntDesign name={(!isPlaying ? 'play' : 'pausecircle')} style={styles.playPause} />
                             </TouchableOpacity>
 
                             {/* Forward */}

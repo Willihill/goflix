@@ -67,7 +67,7 @@ export default ({ navigation } : any) => {
         ?
             <View style={styles.cntLoading}>
                 <StatusBar barStyle="light-content" backgroundColor='#FFF' />
-                <ActivityIndicator size={50} color='#59caef' />
+                <ActivityIndicator size={50} color='#5e45f7' />
             </View>
         :
         <ScrollView style={{ flex: 1 }}>

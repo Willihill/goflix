@@ -27,7 +27,8 @@ const StackMain = createStackNavigator({
     Favorite
 },
 {
-    headerMode: 'none'
+    headerMode: 'none',
+    initialRouteName: 'Favorite'
 }
 );
 

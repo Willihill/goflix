@@ -14,13 +14,14 @@ type InputFatProps = {
     moreProps?: any,
     isPassword?: boolean,
     maxLength?: number,
-    iconComponent?: any
+    iconComponent?: any,
+    backgroundColor?: string
 }
 
 export default (props: InputFatProps) => {
 
     return(
-        <View style={[styles.container, props.style]}>
+        <View style={[styles.container, props.style, { backgroundColor: props.backgroundColor ?? "rgba( 255, 255, 255, .7 )" }]}>
             { props.iconComponent 
             ?
                 <props.iconComponent name="email" style={styles.icon} />
