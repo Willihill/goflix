@@ -40,6 +40,7 @@ export default StyleSheet.create({
         //resizeMode: 's'
         //width: 240
         //paddingLeft: 20
+        paddingBottom: 100
     },
 
     titleList: {

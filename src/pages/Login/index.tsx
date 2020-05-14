@@ -27,7 +27,7 @@ export default ({ navigation } : any) => {
             if(!token)
                 return;
 
-            SaveUser(dispatch, {
+            await SaveUser(dispatch, {
                 name: (await AsyncStorage.getItem("user_name")) ?? '',
                 surname: (await AsyncStorage.getItem("user_surname")) ?? '',
                 birthday: (await AsyncStorage.getItem("user_birthday")) ?? '',
@@ -50,11 +50,11 @@ export default ({ navigation } : any) => {
             async (resp) => {
                 await SaveUser(dispatch, {
                     name: resp.data.name,
-                    surname: resp.data.surname,
+                    surname: resp.data.surName,
                     birthday: resp.data.birthday,
                     email: resp.data.email,
                     gender: resp.data.gender,
-                    picture: resp.data.picture,
+                    picture: resp.data.picture ?? "",
                     tokenJwt: resp.data.tokenJwt
                 });
 

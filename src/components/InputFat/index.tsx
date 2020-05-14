@@ -15,7 +15,8 @@ type InputFatProps = {
     isPassword?: boolean,
     maxLength?: number,
     iconComponent?: any,
-    backgroundColor?: string
+    backgroundColor?: string,
+    disabled?: boolean
 }
 
 export default (props: InputFatProps) => {
@@ -41,6 +42,8 @@ export default (props: InputFatProps) => {
                 placeholderTextColor="#70aff0"
                 onChangeText={props.onChangeText}
                 secureTextEntry={props.isPassword}
+                autoCompleteType="off"
+                editable={(!props.disabled)}
             />
         </View>
     )

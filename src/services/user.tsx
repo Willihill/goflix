@@ -1,7 +1,7 @@
 import { UserReducer } from "../store/ducks/user";
 import { AsyncStorage } from "react-native";
 
-export const SaveUser = async (dispatch: any, user: UserReducer) => {
+export const SaveUser = async (dispatch: any, user: UserReducer) => {   
     // Salva o user na AsyncStorage
     await AsyncStorage.setItem("user_name", user.name);
     await AsyncStorage.setItem("user_surname", user.surname ?? "");
@@ -11,5 +11,5 @@ export const SaveUser = async (dispatch: any, user: UserReducer) => {
     await AsyncStorage.setItem("user_gender", user.gender);
     await AsyncStorage.setItem("tokenJwt", user.tokenJwt);
 
-    dispatch({type: "UPDATE_USER", data: user});  
+    dispatch({type: "SET_USER", user});  
 }

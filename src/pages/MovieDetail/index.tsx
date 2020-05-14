@@ -10,11 +10,13 @@ import api from '../../services/api';
 import { MovieDetailModel, MovieActorModel } from './types';
 import styles from './styles';
 import { FlatList } from 'react-native-gesture-handler';
+import FavoriteIcon from '../../components/FavoriteIcon';
 
 export default ({ navigation } : any) => {
 
-    const [movie, setMovie] = useState<MovieDetailModel>();
+    const [movie, setMovie] = useState<MovieDetailModel>({ id: 0, actors: [], classification: '', cover: '', description: '', duration: { hours: 0, minutes: 0, seconds: 0, totalHours: 0, totalMinutes: 0, totalSeconds: 0 }, isFavorite: false, name: '',releaseDate: new Date() });
     const [loading, setLoading] = useState<boolean>(true);
+    const movieId = navigation.getParam('movie');
 
     useEffect(() => {
         (async () => {
@@ -39,11 +41,11 @@ export default ({ navigation } : any) => {
     }
 
     function onPlay(){
-        navigation.navigate('Player', { movie: navigation.getParam('movie'), nameMovie: movie?.name });
+        navigation.navigate('Player', { movie: movieId, nameMovie: movie.name });
     }
 
-    async function onChangeFavorite(){
-
+    function onChangeFavorite(){
+        setMovie({ ...movie, isFavorite: !movie.isFavorite });
     }
 
     const renderActor = (actor: MovieActorModel) => 
@@ -91,9 +93,13 @@ export default ({ navigation } : any) => {
                                 <Ionicons name="ios-arrow-back" style={styles.optHeader} />
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={onChangeFavorite}>
-                                <Ionicons name="ios-heart-empty" style={styles.optHeader} />
-                            </TouchableOpacity>
+                            <FavoriteIcon
+                                isFavorite={movie?.isFavorite ?? false}
+                                movie={movieId}
+                                size={24}
+                                color="white"
+                                onChangeFavorite={onChangeFavorite}
+                            />
                         </View>
 
                         {/* Playe */}

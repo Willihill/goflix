@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { View, StatusBar } from 'react-native';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from 'react-redux';
+import { View, StatusBar, Image, TouchableOpacityBase, ImageBackground } from 'react-native';
+
+import { AntDesign, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
 import TabNavigator from '../../components/TabNavigator';
 
@@ -11,10 +15,14 @@ import InputFat from '../../components/InputFat';
 import { SaveUser } from '../../services/user';
 import api from '../../services/api';
 import PickerIcon from '../../components/PickerIcon';
+import { UserReducer } from '../../store/ducks/user';
+import { TouchableOpacity, TouchableHighlight } from 'react-native-gesture-handler';
 
 export default ({navigation}:any) => {
 
     const dispatch = useDispatch();
+    const userRedux:UserReducer = useSelector<any, UserReducer>((store:any) => store.user);
+
     const [name, setName] = useState<string>("");
     const [surName, setSurName] = useState<string>("");
     const [gender, setGender] = useState<number>(0);
@@ -24,6 +32,7 @@ export default ({navigation}:any) => {
     const [email, setEmail] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
     const [confirmSenha, setConfirmSenha] = useState<string>("");
+    const [picture, setPicture] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
     const genders : any = [
@@ -42,6 +51,19 @@ export default ({navigation}:any) => {
     ];
 
     useEffect(() => {
+        // Carregando os dados do Redux
+        const year = userRedux.birthday.substr(0, 4);
+        const month = userRedux.birthday.substr(5, 2);
+        const day = userRedux.birthday.substr(8, 2);
+
+        setName(userRedux.name);
+        setSurName(userRedux.surname);
+        setGender((userRedux.gender === 'M' ? 1 : 2));
+        setDay(day);
+        setMonth(month);
+        setYear(year);
+        setEmail(userRedux.email);
+        setPicture(userRedux.picture);
     }, []);
 
     async function onRegister(){
@@ -80,16 +102,17 @@ export default ({navigation}:any) => {
             return;
         }
 
-        if(!senha){
-            alert("Preencha a senha");
-            return;
+        if(senha || confirmSenha){
+            if(!senha){
+                alert("Preencha a senha");
+                return;
+            }
+    
+            if(senha !== confirmSenha){
+                alert("As senhas não correspondem");
+                return;
+            }
         }
-
-        if(senha !== confirmSenha){
-            alert("As senhas não correspondem");
-            return;
-        }           
-
 
         setLoading(true);
 
@@ -99,10 +122,11 @@ export default ({navigation}:any) => {
             "gender": ( gender === 1 ? 'M' : 'F' ),
             "birthday": `${year}-${month}-${day}`,
             "email": email,
-            "password": senha
+            "password": senha,
+            "picture": picture
         }
 
-        await api.post("/Authentication/Register", dataPost)
+        await api.put("/Account", dataPost)
         .then(
             async (resp) => {
                 await SaveUser(dispatch, {
@@ -111,25 +135,84 @@ export default ({navigation}:any) => {
                     birthday: dataPost.birthday,
                     email: dataPost.email,
                     gender: dataPost.gender,
-                    picture: "",
-                    tokenJwt: resp.data.tokenJwt
+                    picture: picture,
+                    tokenJwt: userRedux.tokenJwt
                 });
 
-                navigation.navigate("Main");
+                setLoading(false);
             },
 
             (reject) => {
                 setLoading(false);
-                alert(reject.response.data.message);
+                console.log(reject.response);
+                alert('Erro ao salvar os dados.');
             }
         )        
     }
 
+    async function onChangePicture(){
+        //var resp = await ImagePicker.requestCameraRollPermissionsAsync();
+        // if(!resp.granted)
+        //     return;
+
+        const image = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsMultipleSelection: false,
+            allowsEditing: true,
+            base64: true
+        });
+
+        if(image.base64)
+            setPicture(image.base64)
+    }
+
+    function onRemovePicture(){
+        setPicture('');
+    }
 
     return(
         <View style={styles.container}>
 
             <StatusBar backgroundColor="#FFF" />
+                {/* Picture */}
+                <View style={styles.containerPicture}>
+                    { picture
+                    ?
+                        <ImageBackground 
+                            source={{
+                                uri: `data:image/png;base64,${picture}`
+                            }}
+                            resizeMode="stretch"
+                            resizeMethod="resize"
+                            style={styles.picture} 
+                        />
+                    :
+                        <AntDesign name="user" size={40} color="gray" />
+                    }
+
+                    {/* Remover foto */}
+                    <View style={styles.iconRemove} >
+                        <TouchableOpacity onPress={onRemovePicture} >
+                            <Feather
+                                name="camera-off" 
+                                size={15}
+                                color="#FFF"
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Mudar foto */}
+                    <View style={styles.iconCamera} >
+                        <TouchableOpacity onPress={onChangePicture} >
+                            <Feather
+                                name="camera" 
+                                size={15}
+                                color="#FFF"
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {/* Form login */}
                 <View style={styles.form}>
                     <View style={{ flexDirection: 'row' }}>
@@ -229,6 +312,7 @@ export default ({navigation}:any) => {
                         }}
                         placeholder="E-mail"
                         backgroundColor="#EEE"
+                        disabled={true}
                     />
 
                     <InputFat 
@@ -257,7 +341,7 @@ export default ({navigation}:any) => {
 
                     <View style={{ flexDirection: 'row' }}>
                         <ButtonFat 
-                            text="Cadastrar" 
+                            text="Salvar"
                             style={styles.save}
                             onPress={onRegister}
                             isLoading={loading}

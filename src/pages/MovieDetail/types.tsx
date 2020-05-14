@@ -22,5 +22,6 @@ export type MovieDetailModel = {
     releaseDate: Date,
     classification: string,
     cover: string,
+    isFavorite: boolean,
     actors: MovieActorModel[]
 }

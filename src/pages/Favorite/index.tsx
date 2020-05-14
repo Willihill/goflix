@@ -9,6 +9,7 @@ import styles from './styles';
 import { FavoriteType } from './types';
 import api from '../../services/api';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import FavoriteIcon from '../../components/FavoriteIcon';
 
 export default ({ navigation }: any) => {
 
@@ -40,26 +41,9 @@ export default ({ navigation }: any) => {
         )
     }
 
-    async function onPressHeart(id: number){
-        const movie = favorites.find((value, index, itens) => value.id === id)?.movie.id;
-
-        if(!movie)
-            return;
-
-        setMovieLoadingHandler(id);
-        await api.post(`/Favorite/${movie}`)
-        .then(
-            () => {
-                const newFavorites = favorites.filter((value, index, itens) => value.id !== id);
-                setFavorites(newFavorites);
-                setMovieLoadingHandler(0);
-            },
-
-            (reject) => {
-                console.error("Erro ao remover favorito: ", reject.response.message, reject);
-            }
-        )
-
+    function onRemoveFavorite(id: number){
+        const newFavorites = favorites.filter((value, index, itens) => value.id !== id);
+        setFavorites(newFavorites);
     }
 
     const renderFavorite = (favorite: FavoriteType) => 
@@ -92,14 +76,11 @@ export default ({ navigation }: any) => {
 
             {/* Heart */}
             <View style={styles.heart}>
-                { movieLoadingHandler === favorite.id
-                ?
-                    <ActivityIndicator size={18} color="#5e45f7" />
-                :
-                    <TouchableOpacity onPress={() => onPressHeart(favorite.id)}>
-                        <AntDesign name="heart" style={styles.icon} />
-                    </TouchableOpacity>                
-                }
+                <FavoriteIcon 
+                    isFavorite={true} 
+                    movie={favorite.movie.id} 
+                    onChangeFavorite={() => onRemoveFavorite(favorite.id)} 
+                />
             </View>
         </View>
 
@@ -126,6 +107,9 @@ export default ({ navigation }: any) => {
                     renderItem={({item}) => renderFavorite(item)}
                     keyExtractor={(item) => item.id.toString()}
                     showsVerticalScrollIndicator={true}
+                    contentContainerStyle={{
+                        paddingBottom: 100
+                    }}
                 />
             }
             
