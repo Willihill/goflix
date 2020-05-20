@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, StatusBar, Text, ImageBackground, TextInput, ActivityIndicator } from 'react-native';
+import { View, StatusBar, Text, ImageBackground, TextInput, ActivityIndicator, Dimensions } from 'react-native';
 import { FlatList, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 
@@ -19,6 +19,8 @@ export default ({ navigation }: any) => {
     
     const user: UserReducer = useSelector((store:any) => store.user);
     const refList = useRef(null);
+
+    const { width } = Dimensions.get('window');
 
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -143,7 +145,7 @@ export default ({ navigation }: any) => {
             key={message.id} >
             <View style={{flex: 1 }} />
             <Text style={styles.messageDate}>{`${message.date.getUTCDate()}/${message.date.getUTCMonth()} ${message.date.getUTCHours()}:${message.date.getUTCMinutes()}`}</Text>
-            <View style={[styles.chat, ( message.isMyMessage ? styles.myMessage : styles.message )]}>
+            <View style={[styles.chat, ( message.isMyMessage ? styles.myMessage : styles.message ), { maxWidth: (width*60)/100 }]}>
                 <Text style={styles.messageText}>{message.message}</Text>
             </View>
         </View>
