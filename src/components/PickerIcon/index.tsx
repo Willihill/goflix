@@ -22,7 +22,7 @@ export default function PickerIcon ({ IconName, PropsPicker, Itens, StyleContain
 
     return(
         <View style={{ ...styles.container, ...StyleContainer }}>
-            { IconName ? <AntDesign name={IconName} size={15} color="#70aff0" style={{ ...styles.icon, ...StyleIcon }} /> : [] }
+            { IconName ? <AntDesign name={IconName} size={15} color="darkgray" style={{ ...styles.icon, ...StyleIcon }} /> : [] }
             <Picker 
                 {...PropsPicker}
                 style={{ ...styles.picker, ...StylePicker }}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "row",
-        backgroundColor: "rgba( 255, 255, 255, .7 )",
+        backgroundColor: "#222230",
         borderRadius: 100,
         overflow: "hidden",
         paddingHorizontal: 20,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         borderWidth: 0,
         //backgroundColor: "red",
-        color: "#70aff0",
+        color: "#FFF",
         //marginLeft: -8,
         //height: 44,
         flex: 1,

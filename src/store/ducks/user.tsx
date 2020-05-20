@@ -10,6 +10,7 @@ export const { Types, Creators } = createActions({
 });
 
 export interface UserReducer{
+    id: number,
     name: string,
     surname: string,
     email: string,

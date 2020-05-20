@@ -22,7 +22,7 @@ type InputFatProps = {
 export default (props: InputFatProps) => {
 
     return(
-        <View style={[styles.container, props.style, { backgroundColor: props.backgroundColor ?? "rgba( 255, 255, 255, .7 )" }]}>
+        <View style={[styles.container, props.style, { backgroundColor: props.backgroundColor ?? "#222230" }]}>
             { props.iconComponent 
             ?
                 <props.iconComponent name="email" style={styles.icon} />
@@ -39,7 +39,7 @@ export default (props: InputFatProps) => {
                 maxLength={props?.maxLength ?? 9999}
                 {...props.moreProps}
                 placeholder={props.placeholder}
-                placeholderTextColor="#70aff0"
+                placeholderTextColor="gray"
                 onChangeText={props.onChangeText}
                 secureTextEntry={props.isPassword}
                 autoCompleteType="off"

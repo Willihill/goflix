@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { View, Text, TouchableOpacity, StatusBar, SafeAreaView, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar, Image, ScrollView, Dimensions } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -16,6 +16,9 @@ import PickerIcon from '../../components/PickerIcon';
 export default ({ navigation } : any) => {
 
     const dispatch = useDispatch();
+    const { height } = Dimensions.get('window');
+
+
     const [name, setName] = useState<string>("");
     const [surName, setSurName] = useState<string>("");
     const [gender, setGender] = useState<number>(0);
@@ -107,6 +110,7 @@ export default ({ navigation } : any) => {
         .then(
             async (resp) => {
                 await SaveUser(dispatch, {
+                    id: resp.data.id,
                     name: dataPost.name,
                     surname: dataPost.surname,
                     birthday: dataPost.birthday,
@@ -127,15 +131,20 @@ export default ({ navigation } : any) => {
     }
 
     return(
-        <LinearGradient
-          colors={['#518dcb', '#59caef']}
-          style={styles.container}
-        >
-            <StatusBar backgroundColor="#518dcb" barStyle="light-content" />
-                {/* Logo */}
-
+        <ScrollView style={styles.container} contentContainerStyle={{ minHeight: height }}>
+            <StatusBar backgroundColor="#373855" barStyle="light-content" />
                 {/* Form register */}
                 <View style={styles.cntLogin}>
+                    {/* Logo */}
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Image
+                            source={require('../../../assets/logo_500x5001.png')}
+                            resizeMode="center"
+                            resizeMethod="resize"
+                            style={{ width: 200, height: 200 }}
+                        />
+                    </View>
+
                     <View style={{ flexDirection: 'row' }}>
                         <InputFat 
                             iconName="user"
@@ -260,12 +269,12 @@ export default ({ navigation } : any) => {
                 </View>
 
                 {/* Login User */}
-                <View style={{ justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row', paddingBottom: 50 }}>
+                <View style={{ justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row' }}>
                     <Text style={{ color: '#FFF', fontSize: 14 }}>Já tem uma conta? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                        <Text style={{ color: '#0e84b6', fontSize: 14 }}>Fazer login</Text>
+                        <Text style={{ color: '#5e45f7', fontSize: 14 }}>Fazer login</Text>
                     </TouchableOpacity>
                 </View>
-        </LinearGradient>
+        </ScrollView>
     )
 }

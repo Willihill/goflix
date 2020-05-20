@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        //alignItems: 'center',
         paddingTop: 20
     },
 
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     form: {
         flex: 1,
         flexDirection: "column",
-        paddingHorizontal: 30,
+        //paddingHorizontal: 30,
         justifyContent: "flex-start",
         alignSelf: "stretch",
         marginTop: 50

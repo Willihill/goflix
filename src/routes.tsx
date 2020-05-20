@@ -17,6 +17,8 @@ import Player from "./pages/Player";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import Favorite from "./pages/Favorite";
+import ChatList from "./pages/ChatList";
+import Chat from "./pages/Chat";
 
 const StackMain = createStackNavigator({
     Dashboard,
@@ -24,11 +26,13 @@ const StackMain = createStackNavigator({
     Player,
     Search,
     Profile,
-    Favorite
+    Favorite,
+    ChatList,
+    Chat
 },
 {
     headerMode: 'none',
-    initialRouteName: 'Profile'
+    initialRouteName: 'Dashboard'
 }
 );
 

@@ -10,7 +10,8 @@ type ButtonFatProps = {
     onPress?: (text: GestureResponderEvent) => void,
     style?: StyleProp<TextStyle>,
     moreProps?: any,
-    isLoading: boolean
+    isLoading: boolean,
+    backgroundColor?: string
 }
 
 export default (props: ButtonFatProps) => {
@@ -19,7 +20,7 @@ export default (props: ButtonFatProps) => {
         <TouchableOpacity 
             {...props.moreProps}
             onPress={props.onPress}
-            style={[styles.container, props.style]}
+            style={[styles.container, props.style, { backgroundColor: props.backgroundColor ?? '#5e45f7' }]}
         >
             { props.isLoading
             ?

@@ -3,6 +3,7 @@ import { AsyncStorage } from "react-native";
 
 export const SaveUser = async (dispatch: any, user: UserReducer) => {   
     // Salva o user na AsyncStorage
+    await AsyncStorage.setItem("user_id", user.id.toString());
     await AsyncStorage.setItem("user_name", user.name);
     await AsyncStorage.setItem("user_surname", user.surname ?? "");
     await AsyncStorage.setItem("user_email", user.email);

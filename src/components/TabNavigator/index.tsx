@@ -14,20 +14,15 @@ export default () => {
         //console.log(navigation.state.routeName)
     }, [])
 
-    async function onLogout(){
-        await AsyncStorage.clear();
-        navigation.navigate('Login');
-    }
-
     return(
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate("Favorite")}>
-                <AntDesign name="hearto" style={[styles.icon, (navigation.state.routeName === 'Favorite' ? styles.iconActive : {})]} 
+            <TouchableOpacity onPress={() => navigation.navigate("ChatList")}>
+                <AntDesign name="message1" style={[styles.icon, (navigation.state.routeName === 'ChatList' ? styles.iconActive : {})]} 
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-                <AntDesign name="search1" style={[styles.icon, (navigation.state.routeName === 'Search' ? styles.iconActive : {})]}
+            <TouchableOpacity onPress={() => navigation.navigate("Favorite")}>
+                <AntDesign name="hearto" style={[styles.icon, (navigation.state.routeName === 'Favorite' ? styles.iconActive : {})]} 
                 />
             </TouchableOpacity>
 
@@ -36,14 +31,19 @@ export default () => {
                 />
             </TouchableOpacity>
 
+            <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+                <AntDesign name="search1" style={[styles.icon, (navigation.state.routeName === 'Search' ? styles.iconActive : {})]}
+                />
+            </TouchableOpacity>
+
             <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                 <AntDesign name="user" style={[styles.icon, (navigation.state.routeName === 'Profile' ? styles.iconActive : {}) ]} 
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={onLogout} >
+            {/* <TouchableOpacity onPress={onLogout} >
                 <AntDesign name="logout" style={[styles.icon, { color: 'red' }]} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     )
 }

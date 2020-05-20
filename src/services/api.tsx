@@ -2,8 +2,8 @@ import { AsyncStorage } from "react-native";
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://192.168.0.101:54635/api"
-    //baseURL: "https://goflix.azurewebsites.net/api"
+    //baseURL: "http://192.168.0.101:54635/api"
+    baseURL: "https://goflix.azurewebsites.net/api"
 });
 
 api.interceptors.request.use(async config => {

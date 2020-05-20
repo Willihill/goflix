@@ -3,8 +3,9 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        //justifyContent: "center",
+        //alignItems: "center",
+        backgroundColor: '#373855'
     },
 
     cntLogin: {
@@ -12,12 +13,12 @@ export default StyleSheet.create({
         flexDirection: "column",
         paddingHorizontal: 40,
         justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "stretch",
+        alignItems: "stretch",
+        //alignSelf: "stretch",
     },
 
     btnLogin: {
         marginTop: 20,
-        width: 200
+        //width: 200
     }
 });

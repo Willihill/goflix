@@ -3,17 +3,15 @@
     "name": "GoFlix",
     "slug": "GoFlix",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/blackIcon_192x192.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash_logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5e45f7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,6 +21,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android":{
+      "package": "com.bmmw.goflix",
+      "versionCode": 1
     }
   }
 }

@@ -53,8 +53,6 @@ export default ({ navigation } : any) => {
         await api.get('/Highlights')
         .then(
             (resp) => {
-                //alert('ok')
-                //console.log(resp.data)
                 setHighlights(resp.data);
             },
 

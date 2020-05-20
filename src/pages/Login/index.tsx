@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { View, Text, TouchableOpacity, StatusBar, AsyncStorage } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar, AsyncStorage, Image, Dimensions, ScrollView } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -15,9 +15,11 @@ import styles from './styles';
 export default ({ navigation } : any) => {
 
     const dispatch = useDispatch();
-    const [email, setEmail] = useState<string>("a");
-    const [senha, setSenha] = useState<string>("a");
+    const [email, setEmail] = useState<string>("");
+    const [senha, setSenha] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+
+    const { height } = Dimensions.get('window');
 
     useEffect(() => {
 
@@ -28,6 +30,7 @@ export default ({ navigation } : any) => {
                 return;
 
             await SaveUser(dispatch, {
+                id: parseInt((await AsyncStorage.getItem("user_id")) ?? '0'),
                 name: (await AsyncStorage.getItem("user_name")) ?? '',
                 surname: (await AsyncStorage.getItem("user_surname")) ?? '',
                 birthday: (await AsyncStorage.getItem("user_birthday")) ?? '',
@@ -49,6 +52,7 @@ export default ({ navigation } : any) => {
         .then(
             async (resp) => {
                 await SaveUser(dispatch, {
+                    id: resp.data.id,
                     name: resp.data.name,
                     surname: resp.data.surName,
                     birthday: resp.data.birthday,
@@ -70,15 +74,27 @@ export default ({ navigation } : any) => {
     }
 
     return(
-        <LinearGradient
-          colors={['#518dcb', '#59caef']}
-          style={styles.container}
+        <ScrollView  
+            //emulateUnlessSupported={false}
+            //behavior="padding" 
+            //enabled={true} 
+            //keyboardVerticalOffset={1}
+            style={styles.container}
+            contentContainerStyle={{ height: height }}
         >
-            <StatusBar backgroundColor="#518dcb" barStyle="light-content" />
-                {/* Logo */}
-
+            <StatusBar backgroundColor="#373855" barStyle="light-content" />
                 {/* Form login */}
                 <View style={styles.cntLogin}>
+                    {/* Logo */}
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Image
+                            source={require('../../../assets/logo_500x5001.png')}
+                            resizeMode="center"
+                            resizeMethod="resize"
+                            style={{ width: 200, height: 200 }}
+                        />
+                    </View>
+
                     <InputFat 
                         iconComponent={MaterialCommunityIcons}
                         iconName="email" 
@@ -111,12 +127,12 @@ export default ({ navigation } : any) => {
                 </View>
 
                 {/* New User */}
-                <View style={{ justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row', paddingBottom: 50 }}>
+                <View style={{ justifyContent: 'center', alignItems: 'flex-end', flexDirection: 'row' }}>
                     <Text style={{ color: '#FFF', fontSize: 14 }}>Não tem uma conta? </Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                        <Text style={{ color: '#0e84b6', fontSize: 14 }}>Cadastre-se agora</Text>
+                        <Text style={{ color: '#5e45f7', fontSize: 14 }}>Cadastre-se agora</Text>
                     </TouchableOpacity>
                 </View>
-        </LinearGradient>
+        </ScrollView>
     )
 }
